@@ -8,4 +8,7 @@ class Content < ActiveRecord::Base
     medium: '300x200>',
     mini: '75x50>'
   }
+  validates :name, presence: true
+  validates :content_type, inclusion: { in: %w(image video link),
+    message: "%{value} is not a valid type" }
 end

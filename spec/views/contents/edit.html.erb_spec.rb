@@ -2,15 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "contents/edit", type: :view do
   before(:each) do
-    @content = assign(:content, Content.create!(
-      :name => "MyString",
-      :content_type => "MyString",
-      :content => "MyText",
-      :image => "",
-      :slug => "MyString",
-      :published => false,
-      :user => nil
-    ))
+    @content = assign(:content, Content.create!(FactoryGirl.attributes_for(:content)))
   end
 
   it "renders the edit content form" do

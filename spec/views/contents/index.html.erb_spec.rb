@@ -3,35 +3,26 @@ require 'rails_helper'
 RSpec.describe "contents/index", type: :view do
   before(:each) do
     assign(:contents, [
-      Content.create!(
-        :name => "Name",
-        :content_type => "Content Type",
-        :content => "MyText",
-        :image => "",
-        :slug => "Slug",
-        :published => false,
-        :user => nil
+      Content.create!(FactoryGirl.attributes_for(:content)        
       ),
-      Content.create!(
-        :name => "Name",
-        :content_type => "Content Type",
-        :content => "MyText",
-        :image => "",
-        :slug => "Slug",
-        :published => false,
-        :user => nil
+      Content.create!(FactoryGirl.attributes_for(:content2)
       )
     ])
   end
 
   it "renders a list of contents" do
+    content=FactoryGirl.create(:content) 
+    content2=FactoryGirl.create(:content2) 
     render
-    assert_select "tr>td", :text => "Name".to_s, :count => 2
-    assert_select "tr>td", :text => "Content Type".to_s, :count => 2
-    assert_select "tr>td", :text => "MyText".to_s, :count => 2
-    assert_select "tr>td", :text => "".to_s, :count => 2
-    assert_select "tr>td", :text => "Slug".to_s, :count => 2
-    assert_select "tr>td", :text => false.to_s, :count => 2
-    assert_select "tr>td", :text => nil.to_s, :count => 2
+    assert_select "tr>td", :text => content.name.to_s, :count => 1
+    assert_select "tr>td", :text => content2.name.to_s, :count => 1
+    assert_select "tr>td", :text => content.content_type.to_s, :count => 1
+    assert_select "tr>td", :text => content2.content_type.to_s, :count => 1
+    assert_select "tr>td", :text => content.content.to_s, :count => 1
+    assert_select "tr>td", :text => content2.content_type.to_s  , :count => 1
+
+    assert_select "tr>td", :text => content.slug.to_s  , :count => 1
+    assert_select "tr>td", :text => content2.slug.to_s  , :count => 1
+
   end
 end

@@ -23,13 +23,13 @@ RSpec.describe ContentsController, type: :controller do
   # This should return the minimal set of attributes required to create a valid
   # Content. As you add validations to Content, be sure to
   # adjust the attributes here as well.
-  let(:content) { FactoryGirl.create(:content) }
+
   let(:valid_attributes) {
     FactoryGirl.attributes_for(:content) 
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+   { :name => nil, :content_type => 'h' }
   }
 
   # This should return the minimal set of values that should be in the session
@@ -105,14 +105,14 @@ RSpec.describe ContentsController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        { :name => 'New Video', :content_type => 'video', :content => "<iframe width=\"420\" height=\"315\" src=\"https://www.youtube.com/embed/rRpSgv1JyOo\" frameborder=\"0\" allowfullscreen></iframe>" }
       }
 
       it "updates the requested content" do
         content = Content.create! valid_attributes
         put :update, {:id => content.to_param, :content => new_attributes}, valid_session
         content.reload
-        skip("Add assertions for updated state")
+        expect(content).to have_attributes(new_attributes)
       end
 
       it "assigns the requested content as @content" do

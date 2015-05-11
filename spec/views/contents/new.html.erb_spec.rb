@@ -2,14 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "contents/new", type: :view do
   before(:each) do
-    assign(:content, Content.new(
-      :name => "MyString",
-      :content_type => "MyString",
-      :content => "MyText",
-      :image => "",
-      :slug => "MyString",
-      :published => false,
-      :user => nil
+    assign(:content, Content.new(FactoryGirl.attributes_for(:content)
     ))
   end
 
