@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "AddEditContents", type: :feature do
+RSpec.feature "EditContents", type: :feature do
 	 before do
     @user = FactoryGirl.create(:user)
     login_as @user
@@ -33,3 +33,4 @@ RSpec.feature "AddEditContents", type: :feature do
   end
 
 end
+

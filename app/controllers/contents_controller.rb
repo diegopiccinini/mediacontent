@@ -66,11 +66,12 @@ class ContentsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_content
-      @content = Content.find(params[:id])
+      @content = Content.find_by(slug: params[:id])
+      redirect_to '/422.html' unless @content.user_id == current_user.id
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def content_params
-      params.require(:content).permit(:name, :content_type, :content, :image, :slug, :published, :user_id)
+      params.require(:content).permit(:name, :content_type, :content, :image, :slug, :published)
     end
 end

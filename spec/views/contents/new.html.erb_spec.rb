@@ -19,11 +19,9 @@ RSpec.describe "contents/new", type: :view do
 
       assert_select "input#content_image[name=?]", "content[image]"
 
-      assert_select "input#content_slug[name=?]", "content[slug]"
-
       assert_select "input#content_published[name=?]", "content[published]"
 
-      assert_select "input#content_user_id[name=?]", "content[user_id]"
+     
     end
   end
 end

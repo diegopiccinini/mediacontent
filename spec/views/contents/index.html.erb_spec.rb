@@ -19,10 +19,5 @@ RSpec.describe "contents/index", type: :view do
 
     assert_select "tr>td", :text => content_video.content.to_s, :count => 1
 
-
-    assert_select "tr>td", :text => content.slug.to_s  , :count => 1
-    assert_select "tr>td", :text => content_video.slug.to_s  , :count => 1
-
-
   end
 end

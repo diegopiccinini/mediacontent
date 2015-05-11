@@ -1,4 +1,7 @@
 class Content < ActiveRecord::Base
+  extend FriendlyId
+  friendly_id :name, use: [:slugged, :history, :finders]
+
   belongs_to :user
   validates :image,
     attachment_content_type: { content_type: /\Aimage\/.*\Z/ },
@@ -11,4 +14,7 @@ class Content < ActiveRecord::Base
   validates :name, presence: true
   validates :content_type, inclusion: { in: %w(image video link),
     message: "%{value} is not a valid type" }
+  def to_param
+    self.slug
+  end
 end
