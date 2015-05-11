@@ -44,12 +44,16 @@ group :development, :test do
 
   gem "factory_girl_rails"
   gem 'ffaker'
+  gem "rspec-rails"
+  gem "shoulda-matchers"
+  gem 'capybara'
+  gem 'guard-rspec'
+  gem 'spring-commands-rspec'
+  gem 'vcr'
 end
 
 group :test do
-  gem "rspec-rails"
-  gem "shoulda-matchers"
-  gem "capybara"
+  gem 'webmock'
 end
 
 gem 'libv8', '= 3.16.14.3'

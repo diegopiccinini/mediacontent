@@ -20,7 +20,17 @@ require 'spec_helper'
 
 RSpec.describe ContentsController, type: :controller do
 
-  login_user
+  describe "anonymous user" do
+    before :each do
+      # This simulates an anonymous user
+      login_with nil
+    end
+
+    it "should be redirected to signin" do
+      get :index
+      expect( response ).to redirect_to( new_user_session_path )
+    end
+  end
 
   # This should return the minimal set of attributes required to create a valid
   # Content. As you add validations to Content, be sure to
@@ -40,16 +50,17 @@ RSpec.describe ContentsController, type: :controller do
   let(:valid_session) { {:user_id => session[:user]} }
 
   describe "GET #index" do
-
+   
     it "assigns all contents as @contents" do
-      content = Content.create! valid_attributes
-      get :index, {}, valid_session
-      expect(assigns(:contents)).to eq([content])
+      login_with create( :user )
+      get :index
+      expect( response ).to render_template( :index )
     end
   end
 
   describe "GET #show" do
     it "assigns the requested content as @content" do
+      login_with create( :user )
       content = Content.create! valid_attributes
       get :show, {:id => content.to_param}, valid_session
       expect(assigns(:content)).to eq(content)
@@ -58,6 +69,7 @@ RSpec.describe ContentsController, type: :controller do
 
   describe "GET #new" do
     it "assigns a new content as @content" do
+      login_with create( :user )
       get :new, {}, valid_session
       expect(assigns(:content)).to be_a_new(Content)
     end
@@ -65,6 +77,7 @@ RSpec.describe ContentsController, type: :controller do
 
   describe "GET #edit" do
     it "assigns the requested content as @content" do
+      login_with create( :user )
       content = Content.create! valid_attributes
       get :edit, {:id => content.to_param}, valid_session
       expect(assigns(:content)).to eq(content)
@@ -72,8 +85,12 @@ RSpec.describe ContentsController, type: :controller do
   end
 
   describe "POST #create" do
+    before :each do
+      login_with create( :user )
+    end
     context "with valid params" do
       it "creates a new Content" do
+
         expect {
           post :create, {:content => valid_attributes}, valid_session
         }.to change(Content, :count).by(1)
@@ -106,6 +123,9 @@ RSpec.describe ContentsController, type: :controller do
   end
 
   describe "PUT #update" do
+    before :each do
+      login_with create( :user )
+    end
     context "with valid params" do
       let(:new_attributes) {
         {:name => "Media Content New", 
@@ -150,6 +170,9 @@ RSpec.describe ContentsController, type: :controller do
   end
 
   describe "DELETE #destroy" do
+    before :each do
+      login_with create( :user )
+    end
     it "destroys the requested content" do
       content = Content.create! valid_attributes
       expect {
