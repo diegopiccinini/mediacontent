@@ -53,6 +53,7 @@ end
 
 gem 'libv8', '= 3.16.14.3'
 gem 'devise'
+gem 'rolify'
 gem 'execjs'
 gem 'therubyracer'
 gem 'paperclip'
