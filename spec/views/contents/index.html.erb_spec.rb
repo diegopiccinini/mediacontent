@@ -3,10 +3,9 @@ require 'rails_helper'
 RSpec.describe "contents/index", type: :view do
   before(:each) do
     assign(:contents, [
-      Content.create!(FactoryGirl.attributes_for(:content)        
-      ),
-      Content.create!(FactoryGirl.attributes_for(:content2)
-      )
+      Content.create!(FactoryGirl.attributes_for(:content)),
+      Content.create!(FactoryGirl.attributes_for(:content2)),
+      Content.create!(FactoryGirl.attributes_for(:content3))
     ])
   end
 
@@ -23,6 +22,7 @@ RSpec.describe "contents/index", type: :view do
 
     assert_select "tr>td", :text => content.slug.to_s  , :count => 1
     assert_select "tr>td", :text => content2.slug.to_s  , :count => 1
+    assert_select "tr>td", :text => content3.slug.to_s  , :count => 0
 
   end
 end
