@@ -11,7 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150511082634) do
+ActiveRecord::Schema.define(version: 20150511095352) do
+
+  create_table "contents", force: :cascade do |t|
+    t.string   "name"
+    t.string   "content_type"
+    t.text     "content"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.string   "slug"
+    t.boolean  "published"
+    t.integer  "user_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  add_index "contents", ["user_id"], name: "index_contents_on_user_id"
 
   create_table "roles", force: :cascade do |t|
     t.string   "name"
