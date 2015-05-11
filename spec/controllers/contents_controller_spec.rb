@@ -23,8 +23,9 @@ RSpec.describe ContentsController, type: :controller do
   # This should return the minimal set of attributes required to create a valid
   # Content. As you add validations to Content, be sure to
   # adjust the attributes here as well.
+  let(:content) { FactoryGirl.create(:content) }
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    FactoryGirl.attributes_for(:content) 
   }
 
   let(:invalid_attributes) {
@@ -37,6 +38,7 @@ RSpec.describe ContentsController, type: :controller do
   let(:valid_session) { {} }
 
   describe "GET #index" do
+
     it "assigns all contents as @contents" do
       content = Content.create! valid_attributes
       get :index, {}, valid_session
