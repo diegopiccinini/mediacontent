@@ -11,21 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150511090230) do
-
-  create_table "media", force: :cascade do |t|
-    t.string   "name"
-    t.string   "content_type"
-    t.text     "content"
-    t.string   "image_file_name"
-    t.string   "image_content_type"
-    t.integer  "image_file_size"
-    t.datetime "image_updated_at"
-    t.string   "slug"
-    t.boolean  "share"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
-  end
+ActiveRecord::Schema.define(version: 20150511082634) do
 
   create_table "roles", force: :cascade do |t|
     t.string   "name"
