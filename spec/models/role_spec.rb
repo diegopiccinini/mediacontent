@@ -1,5 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe Role, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+	context "when a user has a role admin" do
+	  before { @user = FactoryGirl.create :admin }
+	  subject { @user }
+
+	  it { expect(@user.has_role? :admin).to be_truthy }
+	end
+
 end
