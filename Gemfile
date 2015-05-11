@@ -49,6 +49,7 @@ end
 group :test do
   gem "rspec-rails"
   gem "shoulda-matchers"
+  gem "capybara"
 end
 
 gem 'libv8', '= 3.16.14.3'
