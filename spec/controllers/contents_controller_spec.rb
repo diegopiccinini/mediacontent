@@ -62,7 +62,7 @@ RSpec.describe ContentsController, type: :controller do
     it "assigns the requested content as @content" do
       login_with create( :user )
       content = Content.create! valid_attributes
-      get :show, {:id => content.to_param}, valid_session
+      get :show, {:slug => content.to_param}, valid_session
       expect(assigns(:content)).to eq(content)
     end
   end
@@ -79,7 +79,7 @@ RSpec.describe ContentsController, type: :controller do
     it "assigns the requested content as @content" do
       login_with create( :user )
       content = Content.create! valid_attributes
-      get :edit, {:id => content.to_param}, valid_session
+      get :edit, {:slug => content.to_param}, valid_session
       expect(assigns(:content)).to eq(content)
     end
   end
@@ -136,7 +136,7 @@ RSpec.describe ContentsController, type: :controller do
 
       it "updates the requested content" do
         content = Content.create! valid_attributes
-        put :update, {:id => content.to_param, :content => new_attributes}, valid_session
+        put :update, {:slug => content.to_param, :content => new_attributes}, valid_session
         content.reload
         expect(content).to have_attributes(new_attributes)
       end
@@ -149,7 +149,7 @@ RSpec.describe ContentsController, type: :controller do
 
       it "redirects to the content" do
         content = Content.create! valid_attributes
-        put :update, {:id => content.to_param, :content => valid_attributes}, valid_session
+        put :update, {:slug => content.to_param, :content => valid_attributes}, valid_session
         expect(response).to redirect_to(content)
       end
     end
@@ -157,13 +157,13 @@ RSpec.describe ContentsController, type: :controller do
     context "with invalid params" do
       it "assigns the content as @content" do
         content = Content.create! valid_attributes
-        put :update, {:id => content.to_param, :content => invalid_attributes}, valid_session
+        put :update, {:slug => content.to_param, :content => invalid_attributes}, valid_session
         expect(assigns(:content)).to eq(content)
       end
 
       it "re-renders the 'edit' template" do
         content = Content.create! valid_attributes
-        put :update, {:id => content.to_param, :content => invalid_attributes}, valid_session
+        put :update, {:slug => content.to_param, :content => invalid_attributes}, valid_session
         expect(response).to render_template("edit")
       end
     end
@@ -176,13 +176,13 @@ RSpec.describe ContentsController, type: :controller do
     it "destroys the requested content" do
       content = Content.create! valid_attributes
       expect {
-        delete :destroy, {:id => content.to_param}, valid_session
+        delete :destroy, {:slug => content.to_param}, valid_session
       }.to change(Content, :count).by(-1)
     end
 
     it "redirects to the contents list" do
       content = Content.create! valid_attributes
-      delete :destroy, {:id => content.to_param}, valid_session
+      delete :destroy, {:slug => content.to_param}, valid_session
       expect(response).to redirect_to(contents_url)
     end
   end
