@@ -4,7 +4,11 @@ class ContentsController < ApplicationController
   # GET /contents
   # GET /contents.json
   def index
-    @contents = Content.all
+    if current_user == nil
+      @contents = Content.where(published: true).all
+    else
+      @contents = Content.where("published = ? OR user_id = ?", true, current_user.id).all
+    end
   end
 
   # GET /contents/1
