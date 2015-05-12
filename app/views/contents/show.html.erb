@@ -10,16 +10,22 @@
   <%= @content.content_type %>
 </p>
 
+
+<% if @content.content_type == 'image' %>
+<p>
+  <strong>Content:</strong>
+  <%= @content.content %>
+</p>
+<p>
+  <strong>Image:</strong>
+  <%= image_tag @content.image :medium %>
+</p>
+<% else %>
 <p>
   <strong>Content:</strong>
   <%= @content.content.html_safe %>
 </p>
-
-<p>
-  <strong>Image:</strong>
-  <%= @content.image %>
-</p>
-
+<% end %>
 <p>
   <strong>Slug:</strong>
   <%= @content.slug %>

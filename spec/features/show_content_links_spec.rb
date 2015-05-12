@@ -55,5 +55,50 @@ RSpec.feature "ShowContentLinks", type: :feature do
 
     
   end
+  context "when publish a image " do
+    it "should have an img tag" do
 
+      visit new_content_path
+
+      within "#new_content" do
+        fill_in "content_name", with: "Green Image"
+        find('select#content_content_type').find("option[value='image']").select_option     
+        fill_in "content_content", with: "MyText"
+        attach_file('content_image', File.join(Rails.root, 'spec', 'support', 'contents', 'images', 'geen.jpg'))
+        check "content_published"
+        
+      end
+
+      click_link_or_button "Create Content"
+
+
+      logout(:user)
+      visit content_path(Content.first.slug)
+      html.should include("Green Image")  
+      find(:xpath, "//img/@src").text.should has_text? "geen.jpg"
+    end
+  end
+  context "when publish a link" do 
+    it "should have a link" do
+
+      visit new_content_path
+
+      within "#new_content" do
+        fill_in "content_name", with: "Google Link"
+        find('select#content_content_type').find("option[value='link']").select_option     
+        fill_in "content_content", with: "<a href=\"https://www.google.es\">Google</a>"
+      
+        check "content_published"
+        
+      end
+
+      click_link_or_button "Create Content"
+
+
+      logout(:user)
+      visit content_path(Content.first.slug)
+      html.should include("Google Link")  
+      html.should include("<a href=\"https://www.google.es\">Google</a>") 
+    end
+  end
 end
