@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "contents/show", type: :view do
   before(:each) do
+
     @content = assign(:content, Content.create!(FactoryGirl.attributes_for(:content)
     ))
   end
