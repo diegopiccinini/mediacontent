@@ -1,7 +1,6 @@
 class ContentsController < ApplicationController
-  before_action :authenticate_user!
-  before_action :set_content, only: [:show, :edit, :update, :destroy]
-
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  before_action :set_content, only: [:edit, :update, :destroy]
   # GET /contents
   # GET /contents.json
   def index
@@ -11,6 +10,8 @@ class ContentsController < ApplicationController
   # GET /contents/1
   # GET /contents/1.json
   def show
+    @content = Content.find_by(slug: params[:id])
+    redirect_to '/422.html' if not @content.published and (current_user == nil or current_user.id != @content.user_id)
   end
 
   # GET /contents/new

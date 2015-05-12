@@ -70,9 +70,8 @@ RSpec.describe ContentsController, type: :controller do
 
   describe "GET #show" do
     it "assigns the requested content as @content" do
-
       content = Content.create! valid_attributes
-      get :show, {:id => content.to_param}, valid_session
+      get :show, {:id => content.to_param }, valid_session
       expect(assigns(:content)).to eq(content)
     end
   end
