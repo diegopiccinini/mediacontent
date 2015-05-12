@@ -27,7 +27,7 @@
           <td><%= content.image %></td>
           <td><%= content.slug %></td>
           <td><%= content.published %></td>
-          <td><%= content.user %></td>
+          <td><%= content.user.email %></td>
           <td><%= link_to 'Show', content %></td>
           <% if user_signed_in? and current_user.id == content.user_id %>
 

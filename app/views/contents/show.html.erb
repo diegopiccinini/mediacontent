@@ -12,19 +12,19 @@
 
 
 <% if @content.content_type == 'image' %>
-<p>
-  <strong>Content:</strong>
-  <%= @content.content %>
-</p>
-<p>
-  <strong>Image:</strong>
-  <%= image_tag @content.image :medium %>
-</p>
+  <p>
+    <strong>Content:</strong>
+    <%= @content.content %>
+  </p>
+  <p>
+    <strong>Image:</strong>
+    <%= image_tag @content.image :medium %>
+  </p>
 <% else %>
-<p>
-  <strong>Content:</strong>
-  <%= @content.content.html_safe %>
-</p>
+  <p>
+    <strong>Content:</strong>
+    <%= @content.content.html_safe %>
+  </p>
 <% end %>
 <p>
   <strong>Slug:</strong>
@@ -38,7 +38,7 @@
 
 <p>
   <strong>User:</strong>
-  <%= @content.user %>
+  <%= @content.user.email %>
 </p>
 <% if user_signed_in? %>
   <%= link_to 'Edit', edit_content_path(@content) %> |
