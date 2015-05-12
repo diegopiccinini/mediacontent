@@ -21,6 +21,6 @@ RSpec.feature "HomePage", type: :feature do
     visit root_path
 
     html.should_not include("<table>")
-
+    html.should have_css("a", :text => "Login")
   end
 end

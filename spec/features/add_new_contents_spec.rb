@@ -74,10 +74,15 @@ RSpec.feature "AddNewContents", type: :feature do
     click_link_or_button "Create Content"
     
     html.should have_css("a", :text => "Logout")
+    visit contents_path
+    html.should include("Video MongoDB")
+    html.should have_css("a", :text => "Show")
+    html.should have_css("a", :text => "Edit")
+    html.should have_css("a", :text => "Destroy")
 
     logout(:user)
- 
     visit contents_path
+ 
     html.should include("Video MongoDB")
     html.should have_css("a", :text => "Show")
     html.should_not have_css("a", :text => "Edit")
