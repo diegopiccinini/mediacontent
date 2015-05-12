@@ -23,6 +23,13 @@
         <tr>
           <td><%= content.name %></td>
           <td><%= content.content_type %></td>
+          <% if content.content_type == 'image' %>
+          <td><%= content.content %></td>
+          <td><%= image_tag content.image :mini %></td>
+          <% else %>
+            <td><%= content.content.html_safe %></td>
+            <td>-</td>
+          <% end %>
           <td><%= content.content %></td>
           <td><%= content.image %></td>
           <td><%= content.slug %></td>
