@@ -67,6 +67,14 @@ class ContentsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  def search
+    if current_user == nil
+      @contents = Content.where("published = ? and name like ?", true, "%#{params[:search]}%") .all
+    else
+      @contents = Content.where("(published = ? OR user_id = ?) and name like ?", true, current_user.id, "%#{params[:search]}%").all
+    end
+    render "index"
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
