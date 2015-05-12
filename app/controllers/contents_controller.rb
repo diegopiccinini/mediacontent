@@ -69,9 +69,9 @@ class ContentsController < ApplicationController
   end
   def search
     if current_user == nil
-      @contents = Content.where("published = ? and name like ?", true, "%#{params[:search]}%") .all
+      @contents = Content.where("published = ? and name like ? ", true, "%#{params[:text_searched]}%") .all
     else
-      @contents = Content.where("(published = ? OR user_id = ?) and name like ?", true, current_user.id, "%#{params[:search]}%").all
+      @contents = Content.where("(published = ? OR user_id = ?) and name like ? ", true, current_user.id, "%#{params[:text_searched]}%").all
     end
     render "index"
   end
