@@ -9,4 +9,18 @@ RSpec.feature "HomePage", type: :feature do
     html.should include("Welcome to media contents")
 
   end
+  it "should not include without media " do
+
+    visit root_path
+
+    html.should_not include("<table>")
+
+  end
+  it "should not include without media " do
+
+    visit root_path
+
+    html.should_not include("<table>")
+
+  end
 end
