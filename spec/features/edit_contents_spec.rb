@@ -15,7 +15,7 @@ RSpec.feature "EditContents", type: :feature do
 
     within "form" do
       fill_in "content_name", with: "Video Mongo"
-      fill_in "content_content_type", with: "video"		
+      find('select#content_content_type').find("option[value='video']").select_option	
 		  fill_in "content_content", with: "<iframe width=\"420\" height=\"315\" src=\"https://www.youtube.com/embed/rRpSgv1JyOo\" frameborder=\"0\" allowfullscreen></iframe>"
 	    check "content_published"
       

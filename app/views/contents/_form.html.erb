@@ -17,7 +17,7 @@
   </div>
   <div class="field">
     <%= f.label :content_type %><br>
-    <%= f.text_field :content_type %>
+    <%= select("content", "content_type", %w[image video link], {prompt: 'Select a type'}) %>
   </div>
   <div class="field">
     <%= f.label :content %><br>
