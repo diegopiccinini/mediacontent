@@ -23,4 +23,12 @@ RSpec.feature "HomePage", type: :feature do
     html.should_not include("<table>")
     html.should have_css("a", :text => "Login")
   end
+  it "should include a search form " do
+
+    visit root_path
+
+    html.should include("<form")
+    html.should have_selector(:link_or_button, 'Search')
+    html.should have_field('text_searched')
+  end
 end

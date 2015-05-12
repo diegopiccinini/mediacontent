@@ -1,7 +1,10 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Welcome to media contents</h1>
-
+<%= form_tag(root_path) do %>
+   <%= text_field_tag('text_searched') %>
+   <%= button_tag("Search") %>
+<% end %> 
 <% if @contents.count > 0 %>
   <table>
     <thead>
