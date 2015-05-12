@@ -20,17 +20,7 @@ require 'spec_helper'
 
 RSpec.describe ContentsController, type: :controller do
 
-  describe "anonymous user" do
-    before :each do
-      # This simulates an anonymous user
-      login_with nil
-    end
 
-    it "should be redirected to signin" do
-      get :index
-      expect( response ).to redirect_to( new_user_session_path )
-    end
-  end
 
   # This should return the minimal set of attributes required to create a valid
   # Content. As you add validations to Content, be sure to
@@ -49,10 +39,30 @@ RSpec.describe ContentsController, type: :controller do
   # ContentsController. Be sure to keep this updated too.
   let(:valid_session) { {:user_id => session[:user]} }
 
+  describe "anonymous user" do
+    before :each do
+      # This simulates an anonymous user
+      login_with nil
+    end
+    context "when edit" do
+      it "should be redirected to signin" do
+        content = Content.create! valid_attributes
+        get :edit, {:id => content.to_param}, valid_session
+        expect( response ).to redirect_to( new_user_session_path )
+      end
+    end
+    context "when new" do
+      it "should be redirected to signin" do
+        get :new
+        expect( response ).to redirect_to( new_user_session_path )
+      end
+    end
+  end
+
   describe "GET #index" do
    
     it "assigns all contents as @contents" do
-      login_with create( :user )
+
       get :index
       expect( response ).to render_template( :index )
     end
@@ -60,7 +70,7 @@ RSpec.describe ContentsController, type: :controller do
 
   describe "GET #show" do
     it "assigns the requested content as @content" do
-      login_with create( :user )
+
       content = Content.create! valid_attributes
       get :show, {:id => content.to_param}, valid_session
       expect(assigns(:content)).to eq(content)
