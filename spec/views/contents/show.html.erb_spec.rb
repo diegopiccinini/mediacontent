@@ -13,7 +13,6 @@ RSpec.describe "contents/show", type: :view do
     expect(rendered).to match(/Content type/)
     expect(rendered).to match(/MyText/)
     expect(rendered).to match(//)
-    expect(rendered).to match(/true/)
  
   end
 end
